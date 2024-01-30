@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=user
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./init/wallet.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+  ewallet:
+    depends_on:
+      - postgresql
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    restart: always

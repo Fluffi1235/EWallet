@@ -1,0 +1,3 @@
+port: ":8080"
+dataDB: "host=postgresql port=5432 user=user password=password dbname=db sslmode=disable"
+timeoutTx: 2
